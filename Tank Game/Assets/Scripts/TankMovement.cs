@@ -48,13 +48,13 @@ public class TankMovement : MonoBehaviour {
         // Store the value of both input axes.
         m_MovementInputValue = Input.GetAxis (m_MovementAxisName);
         m_TurnInputValue = Input.GetAxis (m_TurnAxisName);
+        Shoot(bulletPrefab);
     }
 
     private void FixedUpdate () {
         // Adjust the rigidbodies position and orientation in FixedUpdate.
         Move ();
         Turn ();
-        Shoot(bulletPrefab);
     }
 
 
@@ -80,9 +80,11 @@ public class TankMovement : MonoBehaviour {
 
     private void Shoot (GameObject projectile) {
         if (Input.GetButtonDown("Fire1")) {
+            Debug.Log("shoot");
+            Debug.Log(transform.forward);
             projectile = Instantiate(bulletPrefab);
             projectile.transform.rotation = transform.rotation;
-            projectile.transform.position = transform.position + transform.forward;
+            projectile.transform.position = transform.position + (transform.forward * 2f);
             Destroy(projectile, 3f);
         }
     }
