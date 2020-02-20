@@ -4,13 +4,20 @@ using UnityEngine;
 
 public class TankMovement : MonoBehaviour {
     [Header("Parameters")]
-    public float m_Speed = 12f;                 // How fast the tank moves forward and back.
-    public float m_TurnSpeed = 180f;            // How fast the tank turns in degrees per second.
-    private string m_MovementAxisName;          // The name of the input axis for moving forward and back.
-    private string m_TurnAxisName;              // The name of the input axis for turning.
-    private Rigidbody m_Rigidbody;              // Reference used to move the tank.
-    private float m_MovementInputValue;         // The current value of the movement input.
-    private float m_TurnInputValue;             // The current value of the turn input.
+    // How fast the tank moves forward and back.
+    public float m_Speed = 12f;  
+    // How fast the tank turns in degrees per second.               
+    public float m_TurnSpeed = 180f;     
+    // The name of the input axis for moving forward and back       
+    private string m_MovementAxisName;      
+    // The name of the input axis for turning    
+    private string m_TurnAxisName; 
+    // Reference used to move the tank             
+    private Rigidbody m_Rigidbody; 
+    // The current value of the movement input             
+    private float m_MovementInputValue; 
+    // The current value of the turn input        
+    private float m_TurnInputValue;             
     [Space]
 
     [Header("Shooting")]
@@ -79,12 +86,17 @@ public class TankMovement : MonoBehaviour {
     }
 
     private void Shoot (GameObject projectile) {
+        // If "Fire1" is pressed ...
         if (Input.GetButtonDown("Fire1")) {
             Debug.Log("shoot");
             Debug.Log(transform.forward);
+            // Create Instance of the Bullet
             projectile = Instantiate(bulletPrefab);
+            // Set the Bullet's rotation to the Tank's rotation
             projectile.transform.rotation = transform.rotation;
+            // Set the Bullet's position to the front of the Tank's position
             projectile.transform.position = transform.position + (transform.forward * 2f);
+            // Destroy the projectile after 3 seconds
             Destroy(projectile, 3f);
         }
     }
