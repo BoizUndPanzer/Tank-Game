@@ -21,6 +21,7 @@ public class TankMovement : MonoBehaviour {
     [Space]
 
     [Header("Shooting")]
+    public GameObject tankBarrel;
     public GameObject bulletPrefab;
 
     private void Awake () {
@@ -55,7 +56,7 @@ public class TankMovement : MonoBehaviour {
         // Store the value of both input axes.
         m_MovementInputValue = Input.GetAxis (m_MovementAxisName);
         m_TurnInputValue = Input.GetAxis (m_TurnAxisName);
-        Shoot(bulletPrefab);
+        Shoot(bulletPrefab, tankBarrel);
     }
 
     private void FixedUpdate () {
@@ -85,16 +86,16 @@ public class TankMovement : MonoBehaviour {
         m_Rigidbody.MoveRotation (m_Rigidbody.rotation * turnRotation);
     }
 
-    private void Shoot (GameObject projectile) {
+    private void Shoot (GameObject projectile, GameObject barrel) {
         // If the player presses the "Fire1" button
         if (Input.GetButtonDown("Fire1")) {
             // Create an instance of a bullet
             projectile = Instantiate(bulletPrefab);
-            // Set the bullet's rotation to the player's rotation
-            projectile.transform.rotation = transform.rotation;
-            // Set the Bullet's position to the front of the Tank's position
-            projectile.transform.position = transform.position + (transform.forward * 2f);
-            // Destroy the projectile after 3 seconds
+            // Set the bullet's rotation to the barrel's rotation
+            projectile.transform.rotation = barrel.transform.rotation;
+            // Set the bullet's position to the tip of the barrel
+            projectile.transform.position = barrel.transform.position + (barrel.transform.forward * 2f);
+            //  Destroy the projectile after x amount of seconds
             Destroy(projectile, 3f);
         }
     }
