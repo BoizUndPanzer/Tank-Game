@@ -79,10 +79,11 @@ public class TankMovement : MonoBehaviour {
     }
 
     private void Shoot (GameObject projectile) {
+        // If the player presses the "Fire1" button
         if (Input.GetButtonDown("Fire1")) {
-            Debug.Log("shoot");
-            Debug.Log(transform.forward);
+            // Create an instance of a bullet
             projectile = Instantiate(bulletPrefab);
+            // Set the bullet's rotation to the player's rotation
             projectile.transform.rotation = transform.rotation;
             projectile.transform.position = transform.position + (transform.forward * 2f);
             Destroy(projectile, 3f);
