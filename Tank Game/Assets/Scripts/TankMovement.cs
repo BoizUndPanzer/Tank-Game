@@ -3,8 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TankMovement : MonoBehaviour {
-    [Header("Parameters")]
+    [Header("Controls")]
+    public bool joystickControls = true;
     public bool tankControls = true;
+    [Space]
+    
+    [Header("Parameters")]
     public float m_Speed = 12f;                 // How fast the tank moves forward and back.
     public float m_TurnSpeed = 180f;            // How fast the tank turns in degrees per second.
     private string m_MovementAxisName;          // The name of the input axis for moving forward and back.
@@ -43,13 +47,25 @@ public class TankMovement : MonoBehaviour {
 
 
     private void Start () {
-        // Set Axis for Tank Movement
-        m_MovementAxisName = "LeftJoyStickVertical";
-        m_TurnAxisName = "LeftJoyStickHorizontal";
+        if (joystickControls) {
+            // Set Axis for Tank Movement
+            m_MovementAxisName = "LeftJoyStickVertical";
+            m_TurnAxisName = "LeftJoyStickHorizontal";
 
-        // Set axis for Free Movement
-        moveVertical = "LeftJoyStickVertical";
-        moveHorizontal = "LeftJoyStickHorizontal";
+            // Set axis for Free Movement
+            moveVertical = "LeftJoyStickVertical";
+            moveHorizontal = "LeftJoyStickHorizontal";
+        }
+        else {
+            // Set Axis for Tank Movement
+            m_MovementAxisName = "Vertical";
+            m_TurnAxisName = "Horizontal";
+
+            // Set axis for Free Movement
+            moveVertical = "Vertical";
+            moveHorizontal = "Horizontal";
+        }
+    
     }
 
 
