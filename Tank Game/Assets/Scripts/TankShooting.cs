@@ -26,7 +26,7 @@ public class TankShooting : MonoBehaviour {
             // Set the bullet's position to the tip of the barrel
             projectile.transform.position = barrel.transform.position + (barrel.transform.forward * 2f);
             //  Destroy the projectile after x amount of seconds
-            Destroy(projectile, 3f);
+            Destroy(projectile, 2f);
         }
     }
 }
