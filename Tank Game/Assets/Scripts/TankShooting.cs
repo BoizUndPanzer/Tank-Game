@@ -18,7 +18,7 @@ public class TankShooting : MonoBehaviour {
 
     private void Shoot (GameObject projectile, GameObject barrel) {
         // If the player presses the "Fire1" button
-        if (Input.GetButtonDown("Fire1")) {
+        if (Input.GetButtonDown("A_Button")) {
             // Create an instance of a bullet
             projectile = Instantiate(bulletPrefab);
             // Set the bullet's rotation to the barrel's rotation

@@ -44,12 +44,12 @@ public class TankMovement : MonoBehaviour {
 
     private void Start () {
         // Set Axis for Tank Movement
-        m_MovementAxisName = "Vertical";
-        m_TurnAxisName = "Horizontal";
+        m_MovementAxisName = "LeftJoyStickVertical";
+        m_TurnAxisName = "LeftJoyStickHorizontal";
 
         // Set axis for Free Movement
-        moveVertical = "Vertical";
-        moveHorizontal = "Horizontal";
+        moveVertical = "LeftJoyStickVertical";
+        moveHorizontal = "LeftJoyStickHorizontal";
     }
 
 
