@@ -9,9 +9,13 @@ public class TankMovement : MonoBehaviour {
     public float m_TurnSpeed = 180f;            // How fast the tank turns in degrees per second.
     private string m_MovementAxisName;          // The name of the input axis for moving forward and back.
     private string m_TurnAxisName;              // The name of the input axis for turning.
+    private string moveHorizontal;              // The name of the input axis for moving left and right
+    private string moveVertical;                // The name of the input axis for moving up and down
     private Rigidbody m_Rigidbody;              // Reference used to move the tank.
     private float m_MovementInputValue;         // The current value of the movement input.
     private float m_TurnInputValue;             // The current value of the turn input.
+    private float m_MovementHorizontal;         // The current value of the left/right input.
+    private float m_MovementVertical;           // The current value of the up/down input.
 
     private void Awake () {
         m_Rigidbody = GetComponent<Rigidbody> ();
@@ -19,32 +23,44 @@ public class TankMovement : MonoBehaviour {
 
 
     private void OnEnable () {
-        // When the tank is turned on, make sure it's not kinematic.
-        m_Rigidbody.isKinematic = false;
+        if (tankControls) {
+            // When the tank is turned on, make sure it's not kinematic.
+            m_Rigidbody.isKinematic = false;
 
-        // Also reset the input values.
-        m_MovementInputValue = 0f;
-        m_TurnInputValue = 0f;
+            // Also reset the input values.
+            m_MovementInputValue = 0f;
+            m_TurnInputValue = 0f;
+        }
     }
 
 
     private void OnDisable () {
-        // When the tank is turned off, set it to kinematic so it stops moving.
-        m_Rigidbody.isKinematic = true;
+        if (tankControls) {
+            // When the tank is turned off, set it to kinematic so it stops moving.
+            m_Rigidbody.isKinematic = true;
+        }
     }
 
 
     private void Start () {
-        // The axes names are based on player number.
+        // Set Axis for Tank Movement
         m_MovementAxisName = "Vertical";
         m_TurnAxisName = "Horizontal";
+
+        // Set axis for Free Movement
+        moveVertical = "Vertical";
+        moveHorizontal = "Horizontal";
     }
 
 
     private void Update () {
         // Store the value of both input axes.
-        m_MovementInputValue = Input.GetAxis (m_MovementAxisName);
-        m_TurnInputValue = Input.GetAxis (m_TurnAxisName);
+        m_MovementInputValue = Input.GetAxis (moveVertical);
+        m_TurnInputValue = Input.GetAxis (moveHorizontal);
+
+        // Store the value of both input axes.
+        m_MovementVertical = Input.GetAxisRaw (moveVertical);
+        m_MovementHorizontal = Input.GetAxisRaw (moveHorizontal);
     }
 
     private void FixedUpdate () {
@@ -61,6 +77,11 @@ public class TankMovement : MonoBehaviour {
 
             // Apply this movement to the rigidbody's position.
             m_Rigidbody.MovePosition(m_Rigidbody.position + movement);
+        }
+        else {
+            Vector3 movement = new Vector3 (m_MovementHorizontal, 0f, m_MovementVertical);
+            Vector3 moveVelocity = movement.normalized * m_Speed;
+            m_Rigidbody.MovePosition(m_Rigidbody.position + moveVelocity * Time.fixedDeltaTime);
         }
     }
 
