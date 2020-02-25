@@ -80,8 +80,11 @@ public class TankMovement : MonoBehaviour {
         }
         else {
             Vector3 movement = new Vector3 (m_MovementHorizontal, 0f, m_MovementVertical);
-            Vector3 moveVelocity = movement.normalized * m_Speed;
-            m_Rigidbody.MovePosition(m_Rigidbody.position + moveVelocity * Time.fixedDeltaTime);
+            if (movement.sqrMagnitude > 0f) {
+                transform.rotation = Quaternion.LookRotation(movement);
+                Vector3 moveVelocity = movement.normalized * m_Speed;
+                m_Rigidbody.MovePosition(m_Rigidbody.position + moveVelocity * Time.fixedDeltaTime);
+            } 
         }
     }
 
