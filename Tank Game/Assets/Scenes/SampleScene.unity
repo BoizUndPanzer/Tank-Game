@@ -257,7 +257,7 @@ Transform:
   m_LocalScale: {x: 0.5, y: 0.5, z: 2.5}
   m_Children: []
   m_Father: {fileID: 1906387468}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &528501504
 MeshRenderer:
@@ -415,7 +415,7 @@ Transform:
   m_LocalScale: {x: 1.5, y: 1, z: 2}
   m_Children: []
   m_Father: {fileID: 1906387468}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &657109215
 MeshRenderer:
@@ -859,6 +859,7 @@ GameObject:
   - component: {fileID: 1906387471}
   - component: {fileID: 1906387470}
   - component: {fileID: 1906387469}
+  - component: {fileID: 1906387472}
   m_Layer: 0
   m_Name: Tank
   m_TagString: Untagged
@@ -877,8 +878,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 657109213}
   - {fileID: 528501502}
+  - {fileID: 657109213}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -896,9 +897,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Speed: 12
   m_TurnSpeed: 180
-  tankBarrel: {fileID: 528501501}
-  bulletPrefab: {fileID: 8979989897220932720, guid: 3f35bbd0339b84a49897e9536049f9fd,
-    type: 3}
 --- !u!54 &1906387470
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -928,6 +926,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.5, y: 1, z: 2}
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!114 &1906387472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1906387467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3229acf723db42068557e9fd96bcda0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tankBarrel: {fileID: 528501501}
+  bulletPrefab: {fileID: 8979989897220932720, guid: 3f35bbd0339b84a49897e9536049f9fd,
+    type: 3}
 --- !u!1 &1930156480
 GameObject:
   m_ObjectHideFlags: 0
