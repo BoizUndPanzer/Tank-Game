@@ -6,6 +6,8 @@ public class TankShooting : MonoBehaviour {
     [Header("Shooting")]
     public GameObject tankBarrel;
     public GameObject bulletPrefab;
+    public float fireRate = 3f;    // Set rate at which player can shoot projectiles
+    private float shootingTime;
     // Start is called before the first frame update
     void Start() {
         
@@ -13,12 +15,14 @@ public class TankShooting : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        Shoot(bulletPrefab, tankBarrel);
+        if (Input.GetButtonDown("A_Button") || Input.GetButtonDown("Fire1")) {
+            Shoot(bulletPrefab, tankBarrel);
+        }
     }
 
     private void Shoot (GameObject projectile, GameObject barrel) {
-        // If the player presses the "Fire1" button
-        if (Input.GetButtonDown("A_Button") || Input.GetButtonDown("Fire1")) {
+        if (Time.time > shootingTime) {
+            shootingTime = Time.time + fireRate;
             // Create an instance of a bullet
             projectile = Instantiate(bulletPrefab);
             // Set the bullet's rotation to the barrel's rotation

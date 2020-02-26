@@ -896,7 +896,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   joystickControls: 0
-  tankControls: 0
+  tankControls: 1
   m_Speed: 12
   m_TurnSpeed: 180
 --- !u!54 &1906387470
