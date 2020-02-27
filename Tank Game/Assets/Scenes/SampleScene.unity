@@ -943,6 +943,8 @@ MonoBehaviour:
   tankBarrel: {fileID: 528501501}
   bulletPrefab: {fileID: 8979989897220932720, guid: 3f35bbd0339b84a49897e9536049f9fd,
     type: 3}
+  fireRate: 0.5
+  numBullet: 0
 --- !u!1 &1930156480
 GameObject:
   m_ObjectHideFlags: 0
