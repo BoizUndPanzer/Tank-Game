@@ -4,32 +4,36 @@ using UnityEngine;
 
 public class TankShooting : MonoBehaviour {
     [Header("Shooting")]
+    // Reference to the Tank Barrel
     public GameObject tankBarrel;
+    // Reference to the Bullet Prefab
     public GameObject bulletPrefab;
     // Set rate at which player can shoot projectiles
     public float fireRate = 3f;
     // Set number of bullets allowed on screen at a time
     public int maxBulletsOnScreen = 5;  
-    public bool canShoot = true;
+    // Check wether the player is allowed to shoot
+    private bool canShoot = true;
     // Track number of bullets on screen
     private int numBullet = 0;
+    // Set array that holds GameObjects (Used for counting number of bullets)
     private GameObject[] getCount;
     // Track the time a projectile is shot
     private float shootingTime;
-    // Start is called before the first frame update
     void Start() {
         
     }
 
-    // Update is called once per frame
     void Update() {
         if (Input.GetButtonDown("A_Button") || Input.GetButtonDown("Fire1")) {
             Shoot(bulletPrefab, tankBarrel);
         }
-        limitProjectileNumber();
+        limitProjectileNumber ();
     }
 
+    // Main shooting function.  Simply creates a bullet at a given rate.
     private void Shoot (GameObject projectile, GameObject barrel) {
+        // Check if the time the player shot last is greater than the time of the current frame
         if ((Time.time > shootingTime) && canShoot == true) {
             shootingTime = Time.time + fireRate;
             // Create an instance of a bullet
@@ -45,8 +49,13 @@ public class TankShooting : MonoBehaviour {
         }
     }
 
+    // Limits the number of projectiles on screen.
     private void limitProjectileNumber () {
+        // Count the number of projectiles with the given tag
         getCount = GameObject.FindGameObjectsWithTag ("P1_Bullet");
+        // Check if the number of projectiles on the screen is greater than the max amount allowed
+        // If it is greater than or equal to then make sure the player can't shoot
+        // Otherwise let the player shoot 
         if (getCount.Length >= maxBulletsOnScreen) {
             canShoot = false;
         }

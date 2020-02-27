@@ -4,22 +4,35 @@ using UnityEngine;
 
 public class TankMovement : MonoBehaviour {
     [Header("Controls")]
+    // Check if the player is using a joystick
     public bool joystickControls = true;
+    // Check if the player is using tank controls
     public bool tankControls = true;
     [Space]
     
     [Header("Parameters")]
-    public float m_Speed = 12f;                 // How fast the tank moves forward and back.
-    public float m_TurnSpeed = 180f;            // How fast the tank turns in degrees per second.
-    private string m_MovementAxisName;          // The name of the input axis for moving forward and back.
-    private string m_TurnAxisName;              // The name of the input axis for turning.
-    private string moveHorizontal;              // The name of the input axis for moving left and right
-    private string moveVertical;                // The name of the input axis for moving up and down
-    private Rigidbody m_Rigidbody;              // Reference used to move the tank.
-    private float m_MovementInputValue;         // The current value of the movement input.
-    private float m_TurnInputValue;             // The current value of the turn input.
-    private float m_MovementHorizontal;         // The current value of the left/right input.
-    private float m_MovementVertical;           // The current value of the up/down input.
+    // How fast the tank moves forward and back.
+    public float m_Speed = 12f;  
+    // How fast the tank turns in degrees per second.               
+    public float m_TurnSpeed = 180f;
+    // The name of the input axis for moving forward and back.
+    private string m_MovementAxisName;
+    // The name of the input axis for turning.
+    private string m_TurnAxisName;
+    // The name of the input axis for moving left and right              
+    private string moveHorizontal; 
+    // The name of the input axis for moving up and down             
+    private string moveVertical;
+    // Reference used to move the tank.
+    private Rigidbody m_Rigidbody; 
+    // The current value of the movement input.            
+    private float m_MovementInputValue; 
+    // The current value of the turn input.        
+    private float m_TurnInputValue;             
+    // The current value of the left/right input.
+    private float m_MovementHorizontal; 
+    // The current value of the up/down input.        
+    private float m_MovementVertical;           
 
     private void Awake () {
         m_Rigidbody = GetComponent<Rigidbody> ();
@@ -85,7 +98,7 @@ public class TankMovement : MonoBehaviour {
         Turn (tankControls);
     }
 
-
+    // Set the player tank to use "Tank Controls" or not
     private void TankControls (bool controls) {
         if (controls) {
             // Create a vector in the direction the tank is facing with a magnitude based on the input, speed and the time between frames.
@@ -95,6 +108,7 @@ public class TankMovement : MonoBehaviour {
             m_Rigidbody.MovePosition(m_Rigidbody.position + movement);
         }
         else {
+            // "Free movement" code
             Vector3 movement = new Vector3 (m_MovementHorizontal, 0f, m_MovementVertical);
             if (movement.sqrMagnitude > 0f) {
                 transform.rotation = Quaternion.LookRotation(movement);
@@ -104,7 +118,7 @@ public class TankMovement : MonoBehaviour {
         }
     }
 
-
+    // Rotates the tank body when using tank controls
     private void Turn (bool controls) {
         if (controls) {
             // Determine the number of degrees to be turned based on the input, speed and time between frames.
