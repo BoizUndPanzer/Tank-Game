@@ -986,7 +986,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3229acf723db42068557e9fd96bcda0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tankBarrel: {fileID: 0}
+  tankBarrel: {fileID: 1399125599}
   bulletPrefab: {fileID: 8979989897220932720, guid: 3f35bbd0339b84a49897e9536049f9fd,
     type: 3}
   fireRate: 0

@@ -25,7 +25,8 @@ public class TankShooting : MonoBehaviour {
     }
 
     void Update() {
-        if (Input.GetButtonDown("A_Button") || Input.GetButtonDown("Fire1")) {
+        if (Input.GetAxisRaw("RT_Button") > 0f  || Input.GetButtonDown("Fire1")) {
+            Debug.Log(Input.GetButtonDown("RT_Button"));
             Shoot(bulletPrefab, tankBarrel);
         }
         limitProjectileNumber ();

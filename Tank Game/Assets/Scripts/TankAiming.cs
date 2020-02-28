@@ -18,7 +18,6 @@ public class TankAiming : MonoBehaviour
         // rotateHorizontal = Input.GetAxisRaw ("AimHorizontal");
         rotateVertical = Input.GetAxisRaw ("RightJoyStickVertical");
         rotateHorizontal = Input.GetAxisRaw ("RightJoyStickHorizontal");
-
         RotateBarrel();
     }
 
@@ -26,6 +25,8 @@ public class TankAiming : MonoBehaviour
         Vector3 direction = new Vector3 (rotateHorizontal, 0f, rotateVertical);
         if (direction.sqrMagnitude > 0f) {
                 barrel.transform.rotation = Quaternion.LookRotation(direction);
+                // Debug.Log(rotateHorizontal);
+                // Quaternion rotation = Quaternion.LookRotation(relativePos, Vector3.up);
                 // Vector3 moveVelocity = movement.normalized * m_Speed;
                 // m_Rigidbody.MovePosition(m_Rigidbody.position + moveVelocity * Time.fixedDeltaTime);
             }
