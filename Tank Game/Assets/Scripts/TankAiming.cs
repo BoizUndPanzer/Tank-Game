@@ -9,8 +9,6 @@ public class TankAiming : MonoBehaviour
     private float rotateVertical;
     void Start() {
         barrel = this.gameObject.transform.GetChild(0);
-
-
     }
 
     void Update() {

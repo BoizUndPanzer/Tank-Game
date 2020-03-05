@@ -989,7 +989,7 @@ MonoBehaviour:
   tankBarrel: {fileID: 1399125599}
   bulletPrefab: {fileID: 8979989897220932720, guid: 3f35bbd0339b84a49897e9536049f9fd,
     type: 3}
-  fireRate: 0
+  fireRate: 0.5
   maxBulletsOnScreen: 5
 --- !u!114 &1906387473
 MonoBehaviour:
