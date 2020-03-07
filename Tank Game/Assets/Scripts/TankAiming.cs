@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿  
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,6 +10,8 @@ public class TankAiming : MonoBehaviour
     private float rotateVertical;
     void Start() {
         barrel = this.gameObject.transform.GetChild(0);
+
+
     }
 
     void Update() {
