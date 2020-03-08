@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class TankMovement : MonoBehaviour {
     [Header("Controls")]
+    // Player number
+    public int m_PlayerNumber = 1;
     // Check if the player is using a joystick
     public bool joystickControls = true;
     // Check if the player is using tank controls
@@ -62,12 +64,12 @@ public class TankMovement : MonoBehaviour {
     private void Start () {
         if (joystickControls) {
             // Set Axis for Tank Movement
-            m_MovementAxisName = "LeftJoyStickVertical";
-            m_TurnAxisName = "LeftJoyStickHorizontal";
+            m_MovementAxisName = "P" + m_PlayerNumber + "LSV";
+            m_TurnAxisName = "P" + m_PlayerNumber + "LSH";
 
             // Set axis for Free Movement
-            moveVertical = "LeftJoyStickVertical";
-            moveHorizontal = "LeftJoyStickHorizontal";
+            moveVertical = "P" + m_PlayerNumber + "LSV";
+            moveHorizontal = "P" + m_PlayerNumber + "LSH";
         }
         else {
             // Set Axis for Tank Movement
