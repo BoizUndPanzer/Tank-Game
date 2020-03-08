@@ -20,6 +20,7 @@ public class TankShooting : MonoBehaviour {
     private GameObject[] getCount;
     // Track the time a projectile is shot
     private float shootingTime;
+    // Get reference to TankMovement Script
     private TankMovement TankMovement;
 
     void Start() {

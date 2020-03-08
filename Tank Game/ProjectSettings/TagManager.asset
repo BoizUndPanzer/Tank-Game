@@ -6,6 +6,8 @@ TagManager:
   tags:
   - P1_Bullet
   - P2_Bullet
+  - P3_Bullet
+  - P4_Bullet
   layers:
   - Default
   - TransparentFX
