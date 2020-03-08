@@ -41,7 +41,7 @@ public class TankShooting : MonoBehaviour {
             // Create an instance of a bullet
             projectile = Instantiate(bulletPrefab);
             // Set tag to the instance so that we can count the number of instances
-            projectile.tag = ("P1_Bullet");
+            projectile.tag = ("P" + TankMovement.m_PlayerNumber + "_Bullet");
             // Set the bullet's rotation to the barrel's rotation
             projectile.transform.rotation = barrel.transform.rotation;
             // Set the bullet's position to the tip of the barrel
@@ -54,7 +54,7 @@ public class TankShooting : MonoBehaviour {
     // Limits the number of projectiles on screen.
     private void limitProjectileNumber () {
         // Count the number of projectiles with the given tag
-        getCount = GameObject.FindGameObjectsWithTag ("P1_Bullet");
+        getCount = GameObject.FindGameObjectsWithTag ("P" + TankMovement.m_PlayerNumber + "_Bullet");
         // Check if the number of projectiles on the screen is greater than the max amount allowed
         // If it is greater than or equal to then make sure the player can't shoot
         // Otherwise let the player shoot 
