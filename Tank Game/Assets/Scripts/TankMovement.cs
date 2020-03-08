@@ -11,6 +11,7 @@ public class TankMovement : MonoBehaviour {
     [Space]
     
     [Header("Parameters")]
+    public int m_PlayerNumber = 1;
     // How fast the tank moves forward and back.
     public float m_Speed = 12f;  
     // How fast the tank turns in degrees per second.               
@@ -61,13 +62,13 @@ public class TankMovement : MonoBehaviour {
 
     private void Start () {
         if (joystickControls) {
-            // Set Axis for Tank Movement
-            m_MovementAxisName = "LeftJoyStickVertical";
-            m_TurnAxisName = "LeftJoyStickHorizontal";
+            // The axes names are based on player number.
+            m_MovementAxisName = " J" + m_PlayerNumber + "LV";
+            m_TurnAxisName = "joystick " + m_PlayerNumber + " J" + m_PlayerNumber + "LH";
 
             // Set axis for Free Movement
-            moveVertical = "LeftJoyStickVertical";
-            moveHorizontal = "LeftJoyStickHorizontal";
+            moveVertical = "J" + m_PlayerNumber + "LV";
+            moveHorizontal = "J" + m_PlayerNumber + "LH";
         }
         else {
             // Set Axis for Tank Movement
@@ -84,12 +85,9 @@ public class TankMovement : MonoBehaviour {
 
     private void Update () {
         // Store the value of both input axes.
-        m_MovementInputValue = Input.GetAxis (moveVertical);
-        m_TurnInputValue = Input.GetAxis (moveHorizontal);
+        m_MovementInputValue = Input.GetAxis (m_MovementAxisName);
+        m_TurnInputValue = Input.GetAxis (m_TurnAxisName);
 
-        // Store the value of both input axes.
-        m_MovementVertical = Input.GetAxisRaw (moveVertical);
-        m_MovementHorizontal = Input.GetAxisRaw (moveHorizontal);
     }
 
     private void FixedUpdate () {

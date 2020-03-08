@@ -16,8 +16,8 @@ public class TankAiming : MonoBehaviour
     void Update() {
         // rotateVertical = Input.GetAxisRaw ("AimVertical");
         // rotateHorizontal = Input.GetAxisRaw ("AimHorizontal");
-        rotateVertical = Input.GetAxisRaw ("RightJoyStickVertical");
-        rotateHorizontal = Input.GetAxisRaw ("RightJoyStickHorizontal");
+        rotateVertical = Input.GetAxisRaw ("J1RV");
+        rotateHorizontal = Input.GetAxisRaw ("J1RH");
         RotateBarrel();
     }
 
