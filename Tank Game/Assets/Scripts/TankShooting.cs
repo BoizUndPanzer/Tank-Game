@@ -20,12 +20,14 @@ public class TankShooting : MonoBehaviour {
     private GameObject[] getCount;
     // Track the time a projectile is shot
     private float shootingTime;
+    private TankMovement TankMovement;
+
     void Start() {
-        
+        TankMovement = GetComponent<TankMovement>();
     }
 
     void Update() {
-        if (Input.GetAxisRaw("P1RT") > 0f) {
+        if (Input.GetAxisRaw("P" + TankMovement.m_PlayerNumber + "RT") > 0f) {
             Shoot(bulletPrefab, tankBarrel);
         }
         limitProjectileNumber ();
