@@ -22,13 +22,19 @@ public class TankShooting : MonoBehaviour {
     private float shootingTime;
     // Get reference to TankMovement Script
     private TankMovement TankMovement;
+    // Set Controls according to operating system
+    private char OS;
+
+    void Awake() {
+        OS = SystemInfo.operatingSystem[0];
+    }
 
     void Start() {
         TankMovement = GetComponent<TankMovement>();
     }
 
     void Update() {
-        if (Input.GetAxisRaw("P" + TankMovement.m_PlayerNumber + "RT") > 0f) {
+        if (Input.GetAxisRaw(OS + "P" + TankMovement.m_PlayerNumber + "RT") > 0f) {
             Shoot(bulletPrefab, tankBarrel);
         }
         limitProjectileNumber ();

@@ -8,6 +8,12 @@ public class TankAiming : MonoBehaviour
     private float rotateHorizontal;
     private float rotateVertical;
     private TankMovement TankMovement;
+    // Set Controls according to operating system
+    private char OS;
+
+    void Awake() {
+        OS = SystemInfo.operatingSystem[0];
+    }
     void Start() {
         TankMovement = GetComponent<TankMovement>();
         barrel = this.gameObject.transform.GetChild(0);
@@ -16,8 +22,8 @@ public class TankAiming : MonoBehaviour
     void Update() {
         // rotateVertical = Input.GetAxisRaw ("AimVertical");
         // rotateHorizontal = Input.GetAxisRaw ("AimHorizontal");
-        rotateVertical = Input.GetAxis ("P" + TankMovement.m_PlayerNumber + "RSV");
-        rotateHorizontal = Input.GetAxis ("P" + TankMovement.m_PlayerNumber + "RSH");
+        rotateVertical = Input.GetAxis (OS + "P" + TankMovement.m_PlayerNumber + "RSV");
+        rotateHorizontal = Input.GetAxis (OS + "P" + TankMovement.m_PlayerNumber + "RSH");
         RotateBarrel();
     }
 

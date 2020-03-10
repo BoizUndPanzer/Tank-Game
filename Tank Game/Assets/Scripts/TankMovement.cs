@@ -10,8 +10,8 @@ public class TankMovement : MonoBehaviour {
     public bool joystickControls = true;
     // Check if the player is using tank controls
     public bool tankControls = true;
-    // Check if player is using iOS or Windows
-    public bool windows = true;
+    // Set Controls according to operating system
+    private char OS;
     [Space]
     
     [Header("Parameters")]
@@ -40,6 +40,7 @@ public class TankMovement : MonoBehaviour {
 
     private void Awake () {
         m_Rigidbody = GetComponent<Rigidbody> ();
+        OS = SystemInfo.operatingSystem[0];
     }
 
 
@@ -66,12 +67,12 @@ public class TankMovement : MonoBehaviour {
     private void Start () {
         if (joystickControls) {
             // Set Axis for Tank Movement
-            m_MovementAxisName = "P" + m_PlayerNumber + "LSV";
-            m_TurnAxisName = "P" + m_PlayerNumber + "LSH";
+            m_MovementAxisName = OS + "P" + m_PlayerNumber + "LSV";
+            m_TurnAxisName = OS + "P" + m_PlayerNumber + "LSH";
 
             // Set axis for Free Movement
-            moveVertical = "P" + m_PlayerNumber + "LSV";
-            moveHorizontal = "P" + m_PlayerNumber + "LSH";
+            moveVertical = OS + "P" + m_PlayerNumber + "LSV";
+            moveHorizontal = OS + "P" + m_PlayerNumber + "LSH";
         }
         else {
             // Set Axis for Tank Movement
