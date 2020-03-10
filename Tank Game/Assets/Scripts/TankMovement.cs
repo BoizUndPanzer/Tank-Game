@@ -10,6 +10,8 @@ public class TankMovement : MonoBehaviour {
     public bool joystickControls = true;
     // Check if the player is using tank controls
     public bool tankControls = true;
+    // Check if player is using iOS or Windows
+    public bool windows = true;
     [Space]
     
     [Header("Parameters")]
