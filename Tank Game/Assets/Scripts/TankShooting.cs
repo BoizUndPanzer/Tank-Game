@@ -34,7 +34,8 @@ public class TankShooting : MonoBehaviour {
     }
 
     void Update() {
-        if (Input.GetAxisRaw(OS + "P" + TankMovement.m_PlayerNumber + "RT") > 0f) {
+        if (Input.GetAxis(OS + "P" + TankMovement.m_PlayerNumber + "RT") > 0) {
+            Debug.Log("shoot");
             Shoot(bulletPrefab, tankBarrel);
         }
         limitProjectileNumber ();
@@ -54,7 +55,7 @@ public class TankShooting : MonoBehaviour {
             // Set the bullet's position to the tip of the barrel
             projectile.transform.position = barrel.transform.position + (barrel.transform.forward * 2f);
             //  Destroy the projectile after x amount of seconds
-            Destroy(projectile, 2f);
+            Destroy(projectile, 10f);
         }
     }
 

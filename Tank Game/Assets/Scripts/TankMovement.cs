@@ -97,6 +97,10 @@ public class TankMovement : MonoBehaviour {
         m_MovementHorizontal = Input.GetAxisRaw (moveHorizontal);
     }
 
+    void OnTriggerEnter (Collider other) {
+        Destroy(gameObject);
+    }
+
     private void FixedUpdate () {
         // Adjust the rigidbodies position and orientation in FixedUpdate.
         TankControls (tankControls);
