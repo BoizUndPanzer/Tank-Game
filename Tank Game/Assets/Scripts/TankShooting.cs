@@ -5,7 +5,7 @@ using UnityEngine;
 public class TankShooting : MonoBehaviour {
     [Header("Shooting")]
     // Reference to the Tank Barrel
-    public GameObject tankBarrel;
+    public Transform tankBarrel;
     // Reference to the Bullet Prefab
     public GameObject bulletPrefab;
     // Set rate at which player can shoot projectiles
@@ -42,18 +42,19 @@ public class TankShooting : MonoBehaviour {
     }
 
     // Main shooting function.  Simply creates a bullet at a given rate.
-    private void Shoot (GameObject projectile, GameObject barrel) {
+    private void Shoot (GameObject projectile, Transform barrel) {
+        Vector3 spawnPos = new Vector3(0,1,0);
         // Check if the time the player shot last is greater than the time of the current frame
         if ((Time.time > shootingTime) && canShoot == true) {
             shootingTime = Time.time + fireRate;
             // Create an instance of a bullet
-            projectile = Instantiate(bulletPrefab);
+            projectile = Instantiate(bulletPrefab, (barrel.position + spawnPos + (barrel.forward * 2f)), barrel.rotation);
             // Set tag to the instance so that we can count the number of instances
             projectile.tag = ("P" + TankMovement.m_PlayerNumber + "_Bullet");
             // Set the bullet's rotation to the barrel's rotation
-            projectile.transform.rotation = barrel.transform.rotation;
-            // Set the bullet's position to the tip of the barrel
-            projectile.transform.position = barrel.transform.position + (barrel.transform.forward * 2f);
+            // projectile.transform.rotation = barrel.transform.rotation;
+            // // Set the bullet's position to the tip of the barrel
+            // projectile.transform.position = barrel.transform.position + (barrel.transform.forward * 2f);
             //  Destroy the projectile after x amount of seconds
             Destroy(projectile, 10f);
         }
