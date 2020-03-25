@@ -35,7 +35,6 @@ public class TankShooting : MonoBehaviour {
 
     void Update() {
         if (Input.GetAxis(OS + "P" + TankMovement.m_PlayerNumber + "RT") > 0) {
-            Debug.Log("shoot");
             Shoot(bulletPrefab, tankBarrel);
         }
         limitProjectileNumber ();

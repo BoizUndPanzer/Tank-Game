@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a33b9f597903b4285bd7984252a37711, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotateSpeed: 5
 --- !u!114 &4188882533100602876
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64,7 +65,7 @@ MonoBehaviour:
   m_PlayerNumber: 1
   joystickControls: 1
   tankControls: 1
-  m_Speed: 12
+  m_Speed: 10
   m_TurnSpeed: 180
 --- !u!114 &4188882533100602877
 MonoBehaviour:

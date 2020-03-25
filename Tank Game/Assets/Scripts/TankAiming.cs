@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TankAiming : MonoBehaviour
 {
+    public float rotateSpeed = 5f;
     private Transform barrel;
     private float rotateHorizontal;
     private float rotateVertical;
@@ -29,8 +30,12 @@ public class TankAiming : MonoBehaviour
 
     void RotateBarrel() {
         Vector3 direction = new Vector3 (rotateHorizontal, 0f, rotateVertical);
+        Quaternion targetRotation = Quaternion.Euler(direction);
         if (direction.sqrMagnitude > 0f) {
-                barrel.transform.rotation = Quaternion.LookRotation(direction);
+                // barrel.rotation = Vector3.RotateTowards(barrel.rotation, direction, rotateSpeed * Time.deltaTime, 0.0f);
+                barrel.rotation = Quaternion.LookRotation(Vector3.RotateTowards(barrel.forward, direction, rotateSpeed * Time.deltaTime, 0.0f));
+                Debug.Log(barrel.eulerAngles);
+
                 // Debug.Log(rotateHorizontal);
                 // Quaternion rotation = Quaternion.LookRotation(relativePos, Vector3.up);
                 // Vector3 moveVelocity = movement.normalized * m_Speed;
