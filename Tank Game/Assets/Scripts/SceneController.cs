@@ -12,7 +12,7 @@ public class SceneController : MonoBehaviour
     // Update is called once per frame
     void Update() {
         if (Input.GetKey("escape")) {
-            UnityEditor.EditorApplication.isPlaying = false;
+            // UnityEditor.EditorApplication.isPlaying = false;
             Application.Quit();
         }
     }
