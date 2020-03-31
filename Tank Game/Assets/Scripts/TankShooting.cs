@@ -47,7 +47,7 @@ public class TankShooting : MonoBehaviour {
         if ((Time.time > shootingTime) && canShoot == true) {
             shootingTime = Time.time + fireRate;
             // Create an instance of a bullet
-            projectile = Instantiate(bulletPrefab, (barrel.position + spawnPos + (barrel.forward * 2f)), barrel.rotation);
+            projectile = Instantiate(bulletPrefab, (barrel.position + spawnPos + (barrel.forward * 3f)), barrel.rotation);
             // Set tag to the instance so that we can count the number of instances
             projectile.tag = ("P" + TankMovement.m_PlayerNumber + "_Bullet");
             // Set the bullet's rotation to the barrel's rotation
