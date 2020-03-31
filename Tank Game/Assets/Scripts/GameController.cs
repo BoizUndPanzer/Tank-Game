@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
     // Start is called before the first frame update
@@ -22,9 +23,19 @@ public class GameController : MonoBehaviour {
             string player = winner.Split(' ')[0];
             string number = winner.Split(' ')[1];
 
-            // uiObject.text = "AIBDIBDKABD";
-            uiObject.text = player + " " + number + " WINS";
-            // uiObject.text = " WINS";
+            uiObject.text = player + " " + number + " WINS" + "\n" + "Press A to Restart";
+
+            if (Input.GetButton("MReset")) {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                // Debug.Log("Press");
+            }
+        }
+    }
+
+    void resetGame() {
+        if (Input.GetButton("MReset")) {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            // Debug.Log("Press");
         }
     }
 }
