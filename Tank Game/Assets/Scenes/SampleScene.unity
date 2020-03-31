@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -329,6 +329,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4188882533100602877, guid: 3e2497d0e014b430484bda14fc4d2648,
+        type: 3}
+      propertyPath: tankBarrel
+      value: 
+      objectReference: {fileID: 770196458}
     - target: {fileID: 4188882533100602879, guid: 3e2497d0e014b430484bda14fc4d2648,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -412,7 +417,7 @@ PrefabInstance:
     - target: {fileID: 8571940946605920433, guid: 3e2497d0e014b430484bda14fc4d2648,
         type: 3}
       propertyPath: joystickControls
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8622571218607922567, guid: 3e2497d0e014b430484bda14fc4d2648,
         type: 3}
@@ -617,7 +622,7 @@ PrefabInstance:
     - target: {fileID: 8571940946605920433, guid: 3e2497d0e014b430484bda14fc4d2648,
         type: 3}
       propertyPath: m_PlayerNumber
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8571940946605920433, guid: 3e2497d0e014b430484bda14fc4d2648,
         type: 3}
@@ -632,6 +637,12 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 3e2497d0e014b430484bda14fc4d2648, type: 3}
+--- !u!4 &770196458 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1666752643874681235, guid: 3e2497d0e014b430484bda14fc4d2648,
+    type: 3}
+  m_PrefabInstance: {fileID: 599317881}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -832,7 +843,7 @@ PrefabInstance:
     - target: {fileID: 8571940946605920433, guid: 3e2497d0e014b430484bda14fc4d2648,
         type: 3}
       propertyPath: m_PlayerNumber
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8571940946605920433, guid: 3e2497d0e014b430484bda14fc4d2648,
         type: 3}
@@ -961,7 +972,7 @@ PrefabInstance:
     - target: {fileID: 8571940946605920433, guid: 3e2497d0e014b430484bda14fc4d2648,
         type: 3}
       propertyPath: m_PlayerNumber
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8571940946605920433, guid: 3e2497d0e014b430484bda14fc4d2648,
         type: 3}
