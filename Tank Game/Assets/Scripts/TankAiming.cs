@@ -34,7 +34,6 @@ public class TankAiming : MonoBehaviour
         if (direction.sqrMagnitude > 0f) {
                 // barrel.rotation = Vector3.RotateTowards(barrel.rotation, direction, rotateSpeed * Time.deltaTime, 0.0f);
                 barrel.rotation = Quaternion.LookRotation(Vector3.RotateTowards(barrel.forward, direction, rotateSpeed * Time.deltaTime, 0.0f));
-                Debug.Log(barrel.eulerAngles);
 
                 // Debug.Log(rotateHorizontal);
                 // Quaternion rotation = Quaternion.LookRotation(relativePos, Vector3.up);
