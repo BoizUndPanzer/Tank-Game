@@ -14,6 +14,7 @@ public class GameController : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         checkNumPlayers();
+        resetGame();
     }
 
     void checkNumPlayers() {
@@ -25,17 +26,15 @@ public class GameController : MonoBehaviour {
 
             uiObject.text = player + " " + number + " WINS" + "\n" + "Press A to Restart";
 
-            if (Input.GetButton("MReset")) {
+            if ((Input.GetButton("MReset")) || (Input.GetButton("WReset"))) {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-                // Debug.Log("Press");
             }
         }
     }
 
     void resetGame() {
-        if (Input.GetButton("MReset")) {
+        if (Input.GetButton("Reset")) {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-            // Debug.Log("Press");
         }
     }
 }

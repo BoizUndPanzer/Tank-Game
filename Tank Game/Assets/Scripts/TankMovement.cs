@@ -29,6 +29,7 @@ public class TankMovement : MonoBehaviour {
     private string moveVertical;
     // Reference used to move the tank.
     private Rigidbody m_Rigidbody; 
+    private Collider m_collider;
     // The current value of the movement input.            
     private float m_MovementInputValue; 
     // The current value of the turn input.        
@@ -41,6 +42,7 @@ public class TankMovement : MonoBehaviour {
     private void Awake () {
         m_Rigidbody = GetComponent<Rigidbody> ();
         OS = SystemInfo.operatingSystem[0];
+        m_collider = GetComponent<Collider>();
     }
 
 
@@ -97,9 +99,13 @@ public class TankMovement : MonoBehaviour {
         m_MovementHorizontal = Input.GetAxisRaw (moveHorizontal);
     }
 
-    void OnTriggerEnter (Collider other) {
-        Destroy(gameObject);
-    }
+    // void OnTriggerEnter (Collider other) {
+    //     Destroy(gameObject);
+    // }
+
+    // private void OnCollisionEnter(Collision other) {
+    //     Destroy(gameObject);
+    // }
 
     private void FixedUpdate () {
         // Adjust the rigidbodies position and orientation in FixedUpdate.
