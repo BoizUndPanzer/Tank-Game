@@ -5,7 +5,8 @@ using UnityEngine;
 public class Bullet : MonoBehaviour {
     public float speed = 100f;
     private Collider collider;
-    public LayerMask collisionMask;
+
+    public GameObject testparticle;
 
     public int bounceLimit = 2;
     private int bounceNum = 0;
@@ -18,21 +19,14 @@ public class Bullet : MonoBehaviour {
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
     }
 
-    void OnTriggerEnter (Collider other) {
-        // Debug.Log("Hit");
-        // Destroy(gameObject);
-        // Vector3 v = Vector3.Reflect(transform.up, other.contacts[0].normal);
-        // float rot = 90 - Mathf.Atan2(v.z, v.x) * Mathf.Rad2Deg;
-        // transform.eulerAngles = new Vector3(90, rot, 0);
-    }
-
     void OnCollisionEnter(Collision collision) {
         Vector3 v = Vector3.Reflect(transform.forward , collision.contacts[0].normal);
         float rot = 90 - Mathf.Atan2(v.z, v.x) * Mathf.Rad2Deg;
         transform.eulerAngles = new Vector3(0, rot, 0);
         
         bounceNum += 1;
-        Debug.Log(bounceNum);
+        GameObject shockWave = Instantiate(testparticle, transform.position, Quaternion.identity);
+        shockWave.GetComponent<ParticleSystem>().Play();
 
         if (collision.collider.tag == "Player") {
             Debug.Log ("Player");
@@ -50,4 +44,8 @@ public class Bullet : MonoBehaviour {
             Destroy(gameObject);
         }
     }
+
+    // void EmitParticle() {
+
+    // }
 }
