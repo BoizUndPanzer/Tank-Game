@@ -22,6 +22,7 @@ public class TankShooting : MonoBehaviour {
     private float shootingTime;
     // Get reference to TankMovement Script
     private TankMovement TankMovement;
+    public GameObject particle;
     // Set Controls according to operating system
     private char OS;
 
@@ -38,6 +39,7 @@ public class TankShooting : MonoBehaviour {
         if ((Input.GetAxis(OS + "P" + TankMovement.m_PlayerNumber + "RT") > 0) || (Input.GetKeyDown("space")))
         {
             Shoot(bulletPrefab, tankBarrel);
+            
         }
         limitProjectileNumber();
     }
@@ -50,6 +52,7 @@ public class TankShooting : MonoBehaviour {
             shootingTime = Time.time + fireRate;
             // Create an instance of a bullet
             projectile = Instantiate(bulletPrefab, (barrel.position + spawnPos + (barrel.forward * 2.5f)), barrel.rotation);
+            EmitParticle(tankBarrel);
             // Set tag to the instance so that we can count the number of instances
             projectile.tag = ("P" + TankMovement.m_PlayerNumber + "_Bullet");
             // Set the bullet's rotation to the barrel's rotation
@@ -59,6 +62,13 @@ public class TankShooting : MonoBehaviour {
             //  Destroy the projectile after x amount of seconds
             Destroy(projectile, 10f);
         }
+    }
+
+    void EmitParticle(Transform barrel) {
+        Vector3 spawnPos = new Vector3(0,1,0);
+        GameObject shootparticle = Instantiate(particle, (barrel.position + spawnPos + (barrel.forward * 2.5f)), Quaternion.identity);
+        shootparticle.GetComponent<ParticleSystem>().Play();
+        Destroy(shootparticle, 3f);
     }
 
     // Limits the number of projectiles on screen.
