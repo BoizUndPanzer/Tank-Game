@@ -8,6 +8,8 @@ TagManager:
   - P2_Bullet
   - P3_Bullet
   - P4_Bullet
+  - Wall
+  - P1_Audio
   layers:
   - Default
   - TransparentFX

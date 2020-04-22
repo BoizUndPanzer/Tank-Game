@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TankMovement : MonoBehaviour {
+    [Header("Parts")]
+    // Reference Bottom of Tank
+    public Transform bottom;
+
     [Header("Controls")]
     // Player number
     public int m_PlayerNumber = 1;
@@ -18,7 +22,7 @@ public class TankMovement : MonoBehaviour {
     // How fast the tank moves forward and back.
     public float m_Speed = 12f;  
     // How fast the tank turns in degrees per second.               
-    public float m_TurnSpeed = 180f;
+    public float m_TurnSpeed = 5f;
     // The name of the input axis for moving forward and back.
     private string m_MovementAxisName;
     // The name of the input axis for turning.
@@ -29,6 +33,7 @@ public class TankMovement : MonoBehaviour {
     private string moveVertical;
     // Reference used to move the tank.
     private Rigidbody m_Rigidbody; 
+    private Collider m_collider;
     // The current value of the movement input.            
     private float m_MovementInputValue; 
     // The current value of the turn input.        
@@ -41,6 +46,7 @@ public class TankMovement : MonoBehaviour {
     private void Awake () {
         m_Rigidbody = GetComponent<Rigidbody> ();
         OS = SystemInfo.operatingSystem[0];
+        m_collider = GetComponent<Collider>();
     }
 
 
@@ -97,9 +103,13 @@ public class TankMovement : MonoBehaviour {
         m_MovementHorizontal = Input.GetAxisRaw (moveHorizontal);
     }
 
-    void OnTriggerEnter (Collider other) {
-        Destroy(gameObject);
-    }
+    // void OnTriggerEnter (Collider other) {
+    //     Destroy(gameObject);
+    // }
+
+    // private void OnCollisionEnter(Collision other) {
+    //     Destroy(gameObject);
+    // }
 
     private void FixedUpdate () {
         // Adjust the rigidbodies position and orientation in FixedUpdate.
@@ -118,12 +128,13 @@ public class TankMovement : MonoBehaviour {
         }
         else {
             // "Free movement" code
-            Vector3 movement = new Vector3 (m_MovementHorizontal, 0f, m_MovementVertical);
-            if (movement.sqrMagnitude > 0f) {
-                transform.rotation = Quaternion.LookRotation(movement);
-                Vector3 moveVelocity = movement.normalized * m_Speed;
-                m_Rigidbody.MovePosition(m_Rigidbody.position + moveVelocity * Time.fixedDeltaTime);
-            } 
+
+            Vector3 direction = new Vector3 (m_MovementHorizontal, 0f, m_MovementVertical);
+
+            if (direction.sqrMagnitude > 0f) {
+                Vector3 movement = bottom.forward * m_Speed * Time.deltaTime;
+                m_Rigidbody.MovePosition(m_Rigidbody.position + movement);
+            }
         }
     }
 
@@ -138,6 +149,12 @@ public class TankMovement : MonoBehaviour {
 
             // Apply this rotation to the rigidbody's rotation.
             m_Rigidbody.MoveRotation (m_Rigidbody.rotation * turnRotation);
+        }
+        else {
+            Vector3 direction = new Vector3 (m_MovementHorizontal, 0f, m_MovementVertical);
+            if (direction.sqrMagnitude > 0f) {
+                bottom.rotation = Quaternion.LookRotation(Vector3.RotateTowards(bottom.forward, direction, m_TurnSpeed * Time.deltaTime, 0.0f));
+            }
         }
     }
 }

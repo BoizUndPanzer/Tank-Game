@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TankMovement : MonoBehaviour {
+    [Header("Parts")]
+    // Reference Bottom of Tank
+    public Transform bottom;
+
     [Header("Controls")]
     // Player number
     public int m_PlayerNumber = 1;
@@ -12,13 +16,19 @@ public class TankMovement : MonoBehaviour {
     public bool tankControls = true;
     // Set Controls according to operating system
     private char OS;
+    // Movement sound
+    public AudioSource source;
+    public AudioSource moveSound;
+
     [Space]
     
     [Header("Parameters")]
     // How fast the tank moves forward and back.
     public float m_Speed = 12f;  
     // How fast the tank turns in degrees per second.               
-    public float m_TurnSpeed = 180f;
+    public float m_TurnSpeed = 5f;
+    // Check if moving
+    public bool isPlaying = false;
     // The name of the input axis for moving forward and back.
     private string m_MovementAxisName;
     // The name of the input axis for turning.
@@ -37,7 +47,8 @@ public class TankMovement : MonoBehaviour {
     // The current value of the left/right input.
     private float m_MovementHorizontal; 
     // The current value of the up/down input.        
-    private float m_MovementVertical;           
+    private float m_MovementVertical;   
+    private Vector3 direction;
 
     private void Awake () {
         m_Rigidbody = GetComponent<Rigidbody> ();
@@ -97,6 +108,23 @@ public class TankMovement : MonoBehaviour {
         // Store the value of both input axes.
         m_MovementVertical = Input.GetAxisRaw (moveVertical);
         m_MovementHorizontal = Input.GetAxisRaw (moveHorizontal);
+        
+
+        direction = new Vector3 (m_MovementHorizontal, 0f, m_MovementVertical);
+        
+        // Sound Code
+        if (direction.sqrMagnitude > 0f && isPlaying == false) {
+            moveSound.Play();
+            moveSound.volume = .2f;
+            isPlaying = true;
+        }
+        else if (direction.sqrMagnitude <= 0f) {
+            moveSound.volume -= .25f;
+            if (moveSound.volume <= 0f) {
+                isPlaying = false;
+                moveSound.Stop();
+            }
+        }
     }
 
     // void OnTriggerEnter (Collider other) {
@@ -104,7 +132,9 @@ public class TankMovement : MonoBehaviour {
     // }
 
     // private void OnCollisionEnter(Collision other) {
-    //     Destroy(gameObject);
+    //     if (collision.gameObject.tag == "P1_Bullet" || collision.gameObject.tag == "P2_Bullet" || collision.gameObject.tag == "P3_Bullet" || collision.gameObject.tag == "P4_Bullet")
+    //         GameObject snd_explosion = Instantiate(explosionSound, transform.position, Quaternion.identity);
+    //     }
     // }
 
     private void FixedUpdate () {
@@ -123,13 +153,14 @@ public class TankMovement : MonoBehaviour {
             m_Rigidbody.MovePosition(m_Rigidbody.position + movement);
         }
         else {
+
+
             // "Free movement" code
-            Vector3 movement = new Vector3 (m_MovementHorizontal, 0f, m_MovementVertical);
-            if (movement.sqrMagnitude > 0f) {
-                transform.rotation = Quaternion.LookRotation(movement);
-                Vector3 moveVelocity = movement.normalized * m_Speed;
-                m_Rigidbody.MovePosition(m_Rigidbody.position + moveVelocity * Time.fixedDeltaTime);
-            } 
+            // Vector3 direction = new Vector3 (m_MovementHorizontal, 0f, m_MovementVertical);
+            if (direction.sqrMagnitude > 0f) {
+                Vector3 movement = bottom.forward * m_Speed * Time.deltaTime;
+                m_Rigidbody.MovePosition(m_Rigidbody.position + movement);
+            }
         }
     }
 
@@ -144,6 +175,12 @@ public class TankMovement : MonoBehaviour {
 
             // Apply this rotation to the rigidbody's rotation.
             m_Rigidbody.MoveRotation (m_Rigidbody.rotation * turnRotation);
+        }
+        else {
+            Vector3 direction = new Vector3 (m_MovementHorizontal, 0f, m_MovementVertical);
+            if (direction.sqrMagnitude > 0f) {
+                bottom.rotation = Quaternion.LookRotation(Vector3.RotateTowards(bottom.forward, direction, m_TurnSpeed * Time.deltaTime, 0.0f));
+            }
         }
     }
 }

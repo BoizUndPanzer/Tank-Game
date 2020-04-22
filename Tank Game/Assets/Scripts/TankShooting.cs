@@ -12,6 +12,8 @@ public class TankShooting : MonoBehaviour {
     public float fireRate = 3f;
     // Set number of bullets allowed on screen at a time
     public int maxBulletsOnScreen = 5;  
+    // Shooting Audio
+    public AudioSource snd_shoot;
     // Check wether the player is allowed to shoot
     private bool canShoot = true;
     // Track number of bullets on screen
@@ -51,7 +53,8 @@ public class TankShooting : MonoBehaviour {
         if ((Time.time > shootingTime) && canShoot == true) {
             shootingTime = Time.time + fireRate;
             // Create an instance of a bullet
-            projectile = Instantiate(bulletPrefab, (barrel.position + spawnPos + (barrel.forward * 2.5f)), barrel.rotation);
+            projectile = Instantiate(bulletPrefab, (barrel.position + spawnPos + (barrel.forward * 5.5f)), barrel.rotation);
+            PlaySound(snd_shoot);
             EmitParticle(tankBarrel);
             // Set tag to the instance so that we can count the number of instances
             projectile.tag = ("P" + TankMovement.m_PlayerNumber + "_Bullet");
@@ -66,7 +69,7 @@ public class TankShooting : MonoBehaviour {
 
     void EmitParticle(Transform barrel) {
         Vector3 spawnPos = new Vector3(0,1,0);
-        GameObject shootparticle = Instantiate(particle, (barrel.position + spawnPos + (barrel.forward * 2.5f)), Quaternion.identity);
+        GameObject shootparticle = Instantiate(particle, (barrel.position + spawnPos + (barrel.forward * 3f)), Quaternion.identity);
         shootparticle.GetComponent<ParticleSystem>().Play();
         Destroy(shootparticle, 3f);
     }
@@ -84,5 +87,9 @@ public class TankShooting : MonoBehaviour {
         else {
             canShoot = true;
         }
+    }
+
+    void PlaySound(AudioSource sound) {
+        sound.Play();
     }
 }
